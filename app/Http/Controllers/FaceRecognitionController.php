@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Intervention\Image\ImageManagerStatic as Image;
 use face_recognition\FaceRecognition;
-
+use App\Models\Absen;
 class FaceRecognitionController extends Controller
 {
     public function facerecognition(Request $request)
@@ -38,11 +38,16 @@ class FaceRecognitionController extends Controller
             $responseData = json_decode($response->getBody()->getContents(),true);
 
             if ($responseData['face'] == 'Recognize') {
-                $message = 'Face recognized!';
+                $message = 'Absent Successfully!';
+                $name = implode(', ', $responseData['matches']);
+                Absen::create([
+                    'name'=>$name
+                ]);
             }elseif($responseData['face'] == 'NoRecognize'){
                 $message = 'Face Not Recognized!';
-            }
-    
+                $name = $message;
+            }            
+
             return view('face-recognition')->with([
                 'result' => $responseData,
                 'message' => $message,
@@ -51,6 +56,12 @@ class FaceRecognitionController extends Controller
         } catch (Exception $e) {
             return response()->json(['success' => false, 'error' => $e->getMessage()]);
         }
+    }
+
+    public function viewdata()
+    {
+        $view = Absen::all();
+        return view('data',compact('view'));
     }
 
 }

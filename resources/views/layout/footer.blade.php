@@ -49,5 +49,3 @@
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="{{asset('layout/dist/js/demo.js')}}"></script> -->
 
-<script defer src="./js/face-api.min.js"></script>
-<script defer src="./js/main.js"></script>

@@ -15,15 +15,22 @@
         @endif
         </div>
 </div>  
-@if($message == 'Face recognized!')
+@if($message == 'Absent Successfully!')
     <script>
         Swal.fire({
-        title: "{{ $message }}",
-        icon: "success",
-        confirmButtonText: "OK"
-        }).then(function() {
-            window.location.assign('/absen');
-        });;
+            title: "{{ $message }}",
+            text: "{{ implode(', ', $result['matches']) }}",
+            icon: "success",
+            showCancelButton: true,
+            confirmButtonText: "OK",
+            cancelButtonText: "Cancel"
+        }).then(function(result) {
+            if (result.value) {
+                window.location.assign('/absen');
+            } else {
+                window.location.assign('/index');
+            }
+        });
     </script>
 @else
     <script>

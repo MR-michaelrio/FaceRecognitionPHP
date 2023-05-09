@@ -1,7 +1,7 @@
 @extends('layout.template')
 
 @section('title')
-    Table Owner
+    Absen
 @endsection
 
 @section('content')
@@ -18,5 +18,6 @@
         </form>
     </div>
 </div>
-
+<script defer src="./js/face-api.min.js"></script>
+<script defer src="./js/main.js"></script>
 @endsection

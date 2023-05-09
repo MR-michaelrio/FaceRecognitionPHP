@@ -17,7 +17,15 @@ use App\Http\Controllers\FaceRecognitionController;
 Route::get('/', function () {
     return view('layout.template');
 });
+
+Route::get('/index', function () {
+    return view('layout.template');
+});
+
 Route::get('/absen', function () {
     return view('absensi');
 });
+
+Route::get('/datafacerecognition', [FaceRecognitionController::class, 'viewdata'])->name('viewdata');
+
 Route::post('/facerecognition', [FaceRecognitionController::class, 'facerecognition'])->name('facerecognition');
